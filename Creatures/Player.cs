@@ -6,7 +6,11 @@ public partial class Player : Area2D
 	[Export]
 	public int Speed { get; set; } = 400;
 
+	[Export]
+	public PackedScene Arrows {get; set;}
+
 	public Vector2 ArenaSize; //Size of the module
+
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -53,5 +57,16 @@ public partial class Player : Area2D
 		Position += velocity * (float)delta;
 		Position = new Vector2(x: Mathf.Clamp(Position.X, 0, ArenaSize.X), y: Mathf.Clamp(Position.Y, 0, ArenaSize.Y));
 
+		if(Input.IsActionPressed("attack"))
+		{
+			Attack();
+		}
+
+	}
+
+	private void Attack()
+	{
+		Projectile arrow = Arrows.Instantiate<Projectile>();
+		AddChild(arrow);
 	}
 }

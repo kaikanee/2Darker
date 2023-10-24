@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwdsxunemyx2b"]
+[gd_scene load_steps=5 format=3 uid="uid://dwdsxunemyx2b"]
 
 [ext_resource type="Script" path="res://Creatures/Player.cs" id="1_sfcmd"]
 [ext_resource type="Texture2D" uid="uid://clbc4y4o4hpfj" path="res://Creatures/fighter_1.png" id="2_gu8yd"]
+[ext_resource type="PackedScene" uid="uid://dmafl0fumfx7v" path="res://Creatures/Projectile.tscn" id="2_lcvyo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7ghpc"]
 animations = [{
@@ -16,6 +17,7 @@ animations = [{
 
 [node name="Player" type="Area2D"]
 script = ExtResource("1_sfcmd")
+Arrows = ExtResource("2_lcvyo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7ghpc")

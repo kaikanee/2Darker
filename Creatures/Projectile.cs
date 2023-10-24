@@ -7,19 +7,11 @@ public partial class Projectile : Area2D
 	[Export]
 	
 	//projectile speed
-	public int Speed {get; set;	} = 650;
-
+	public int Speed {get; set;	} = 1250;
+	private Vector2 velocity = Vector2.Zero;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-
-		// this is just stolen from the player class, just sends the velocity in the direction dictated by the movement input.
-		Vector2 velocity = Vector2.Zero;
 		if(Input.IsActionPressed("move_right"))
 		{
 			velocity.X += 1;
@@ -36,6 +28,15 @@ public partial class Projectile : Area2D
 		{
 			velocity.Y += 1;
 		}
+		velocity = velocity.Normalized() * Speed;
+	}
+
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+
+		// this is just stolen from the player class, just sends the velocity in the direction dictated by the movement input.
+		
 		Position += velocity * (float)delta;
 		// for now, the projectile is only deleted on projectile timeout, but eventually we will implement logic for it hitting a wall, etc. probably clamp it to screensize.
 	}
