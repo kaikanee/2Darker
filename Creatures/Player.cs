@@ -59,7 +59,12 @@ public partial class Player : Area2D
 
 		if(Input.IsActionPressed("attack"))
 		{
-			Attack();
+			Timer attackTimer = GetNode<Timer>("AttackTimer");
+			if(attackTimer.TimeLeft <= 0)
+			{
+				attackTimer.Start();
+				Attack();
+			}
 		}
 
 	}

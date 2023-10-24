@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwdsxunemyx2b"]
+[gd_scene load_steps=6 format=3 uid="uid://dwdsxunemyx2b"]
 
 [ext_resource type="Script" path="res://Creatures/Player.cs" id="1_sfcmd"]
 [ext_resource type="Texture2D" uid="uid://clbc4y4o4hpfj" path="res://Creatures/fighter_1.png" id="2_gu8yd"]
@@ -15,9 +15,19 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1xjrj"]
+size = Vector2(106, 138)
+
 [node name="Player" type="Area2D"]
 script = ExtResource("1_sfcmd")
 Arrows = ExtResource("2_lcvyo")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7ghpc")
+
+[node name="AttackTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_1xjrj")

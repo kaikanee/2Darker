@@ -54,10 +54,13 @@ public partial class Projectile : Area2D
 	/// <param name="body">The actual thing it hits.</param>
 	private void OnBodyEntered(Node2D body)
 	{
-		if(body.IsInGroup("enemy"))
+		body.QueueFree();
+		/*if(body.IsInGroup("enemy") || (Enemy)body != null)
 		{
+			Enemy enemy = (Enemy)body;
+			enemy.Hit(9000);
 			// do something to the enemy,, maybe cast it and call a function damage() or something that takes away hp?
-		}
+		}*/
 		QueueFree(); // delete the bullet
 	}
 

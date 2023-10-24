@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7puw5qo51pat"]
+
+[ext_resource type="PackedScene" uid="uid://dwdsxunemyx2b" path="res://Creatures/Player.tscn" id="1_n4s81"]
+[ext_resource type="Script" path="res://Creatures/Enemy.cs" id="2_p6rc4"]
+
+[node name="Enemy" instance=ExtResource("1_n4s81")]
+script = ExtResource("2_p6rc4")
+Health = 5000

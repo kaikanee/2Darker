@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="2Darker"
-run/main_scene="res://Creatures/Player.tscn"
+run/main_scene="res://testscene.tscn"
 config/features=PackedStringArray("4.1", "C#", "Forward Plus")
 config/icon="res://icon not real lol.svg"
 
