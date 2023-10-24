@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmafl0fumfx7v"]
+
+[ext_resource type="Script" path="res://Creatures/Projectile.cs" id="1_j8hkk"]
+[ext_resource type="Texture2D" uid="uid://b8iin8sa08woa" path="res://Creatures/arrow.png" id="1_le27c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l82iv"]
+size = Vector2(16, 4)
+
+[node name="Arrow" type="Area2D"]
+script = ExtResource("1_j8hkk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_le27c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_l82iv")
+
+[node name="ProjectileTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="timeout" from="ProjectileTimer" to="." method="OnProjectileTimeout"]
