@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://testscene.cs" id="1_wcv7a"]
 [ext_resource type="PackedScene" uid="uid://dwdsxunemyx2b" path="res://Creatures/Player.tscn" id="2_0c7wp"]
-[ext_resource type="PackedScene" uid="uid://c7puw5qo51pat" path="res://Creatures/Enemy.tscn" id="3_kqe0u"]
+[ext_resource type="PackedScene" uid="uid://bbxmmnlhdmi52" path="res://Creatures/Enemy/TargetDummy.tscn" id="3_dabde"]
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_wcv7a")
 Player = ExtResource("2_0c7wp")
-Dummy = ExtResource("3_kqe0u")
+Dummy = ExtResource("3_dabde")

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbxmmnlhdmi52"]
+
+[ext_resource type="Texture2D" uid="uid://c5tyhql3e8m13" path="res://Creatures/Enemy/dummy.png" id="1_8v0rw"]
+[ext_resource type="Script" path="res://Creatures/Enemy/TargetDummy.cs" id="1_pompg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3inli"]
+size = Vector2(10.875, 13.875)
+
+[node name="TargetDummy" type="Area2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_pompg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("1_8v0rw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.25, -1.75)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_3inli")
+
+[node name="DamageNumber" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="InvulnTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="timeout" from="InvulnTimer" to="." method="OnInvulnTimerTimeout"]

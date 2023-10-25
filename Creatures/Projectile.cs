@@ -8,6 +8,10 @@ public partial class Projectile : Area2D
 	
 	//projectile speed
 	public int Speed {get; set;	} = 1250;
+
+	[Export]
+	public int PhysDamage {get; set;} = 25;
+
 	private Vector2 velocity = Vector2.Zero;
 	private Vector2 direction = Vector2.Zero;
 	// Called when the node enters the scene tree for the first time.
