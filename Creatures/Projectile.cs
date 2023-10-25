@@ -13,11 +13,8 @@ public partial class Projectile : Area2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		// This is still a very bandaid fix. What is likely going to happen is we instead spawn this off of a Marker2D
-		// whose direction is controlled by the mouse/controller stick.
-		var mousePosition = GetGlobalMousePosition();
-		direction = (mousePosition - Position).Normalized();
 		velocity = velocity.Normalized() * Speed;
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -26,7 +23,7 @@ public partial class Projectile : Area2D
 
 		// this is just stolen from the player class, just sends the velocity in the direction dictated by the movement input.
 		
-		Position += direction + velocity * (float)delta;
+		Position += Transform.X * Speed * (float)delta;
 		// for now, the projectile is only deleted on projectile timeout, but eventually we will implement logic for it hitting a wall, etc. probably clamp it to screensize.
 	}
 
@@ -43,14 +40,16 @@ public partial class Projectile : Area2D
 	/// <param name="body">The actual thing it hits.</param>
 	private void OnBodyEntered(Node2D body)
 	{
-		body.QueueFree();
-		/*if(body.IsInGroup("enemy") || (Enemy)body != null)
+		if(!body.IsInGroup("player")) // if we dont hit the player
 		{
-			Enemy enemy = (Enemy)body;
-			enemy.Hit(9000);
-			// do something to the enemy,, maybe cast it and call a function damage() or something that takes away hp?
-		}*/
-		QueueFree(); // delete the bullet
+			Label lbl = GetNode<Label>("Label");
+			lbl.Text = "Hit!";
+			lbl.Show();
+			body.QueueFree(); // for now just kill the thing it hits.
+			QueueFree(); // kill the bullet
+		}
+		
+		
 	}
 
 }

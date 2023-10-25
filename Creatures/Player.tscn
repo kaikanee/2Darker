@@ -16,9 +16,9 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1xjrj"]
-size = Vector2(106, 138)
+size = Vector2(110, 150)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" groups=["player"]]
 script = ExtResource("1_sfcmd")
 Arrows = ExtResource("2_lcvyo")
 
@@ -29,5 +29,8 @@ sprite_frames = SubResource("SpriteFrames_7ghpc")
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_1xjrj")
+metadata/_edit_group_ = true
+
+[node name="AttackOrigin" type="Marker2D" parent="."]
+metadata/_edit_group_ = true

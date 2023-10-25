@@ -15,6 +15,7 @@ public partial class testscene : Area2D
 		Player player = Player.Instantiate<Player>();
 		AddChild(player);
 		Enemy enemy = Dummy.Instantiate<Enemy>();
+		enemy.Position = GetViewportRect().Size / 2;
 		AddChild(enemy);
 	}
 
