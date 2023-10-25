@@ -9,25 +9,14 @@ public partial class Projectile : Area2D
 	//projectile speed
 	public int Speed {get; set;	} = 1250;
 	private Vector2 velocity = Vector2.Zero;
+	private Vector2 direction = Vector2.Zero;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		if(Input.IsActionPressed("move_right"))
-		{
-			velocity.X += 1;
-		}
-		if(Input.IsActionPressed("move_left"))
-		{
-			velocity.X -= 1;
-		}
-		if(Input.IsActionPressed("move_up"))
-		{
-			velocity.Y -= 1;
-		}
-		if(Input.IsActionPressed("move_down"))
-		{
-			velocity.Y += 1;
-		}
+		// This is still a very bandaid fix. What is likely going to happen is we instead spawn this off of a Marker2D
+		// whose direction is controlled by the mouse/controller stick.
+		var mousePosition = GetGlobalMousePosition();
+		direction = (mousePosition - Position).Normalized();
 		velocity = velocity.Normalized() * Speed;
 	}
 
@@ -37,7 +26,7 @@ public partial class Projectile : Area2D
 
 		// this is just stolen from the player class, just sends the velocity in the direction dictated by the movement input.
 		
-		Position += velocity * (float)delta;
+		Position += direction + velocity * (float)delta;
 		// for now, the projectile is only deleted on projectile timeout, but eventually we will implement logic for it hitting a wall, etc. probably clamp it to screensize.
 	}
 
