@@ -42,7 +42,7 @@ public partial class Projectile : Area2D
 	/// Called when a body enters the projectile's hitbox. Basically when it hit something.
 	/// </summary>
 	/// <param name="body">The actual thing it hits.</param>
-	private void OnBodyEntered(Node2D body)
+	private void _OnBodyEntered(Node2D body)
 	{
 		if(!body.IsInGroup("player")) // if we dont hit the player
 		{

@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://dbgpln8ty8nbs"]
+
+[ext_resource type="Script" path="res://Weapons/Arming Sword/ArmingSword.cs" id="1_rgcwt"]
+[ext_resource type="Texture2D" uid="uid://80itn2gs7v7w" path="res://Weapons/Arming Sword/16xSword.png" id="1_rrjgs"]
+[ext_resource type="Texture2D" uid="uid://ofedfuk1mwi0" path="res://Weapons/Arming Sword/16xSwordTrail.png" id="2_er8eo"]
+[ext_resource type="Texture2D" uid="uid://cr4xj84ttgpfh" path="res://Weapons/Arming Sword/16xSwordTrail2.png" id="4_75dnq"]
+[ext_resource type="Texture2D" uid="uid://cvh3y3747wsq5" path="res://Weapons/Arming Sword/16xSwordTrail3.png" id="5_ljcow"]
+[ext_resource type="Texture2D" uid="uid://c7tl2bd5v5sj3" path="res://Weapons/Arming Sword/16xSwordTrail4.png" id="6_gju1t"]
+[ext_resource type="Texture2D" uid="uid://bksj3vn28po8l" path="res://Weapons/Arming Sword/16xSwordTrail5.png" id="7_cbwr8"]
+[ext_resource type="Texture2D" uid="uid://d3tbfajryxhy" path="res://Weapons/Arming Sword/16xSwordTrail6.png" id="8_6l6wj"]
+[ext_resource type="Texture2D" uid="uid://ehx1r6acmcwp" path="res://Weapons/Arming Sword/16xSwordTrail7.png" id="9_a1fwq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qxiw0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rrjgs")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_myudw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_er8eo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_75dnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ljcow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gju1t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_cbwr8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_6l6wj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_a1fwq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[node name="ArmingSword" type="Area2D" node_paths=PackedStringArray("meleeItem", "meleeTrail", "meleeCol")]
+z_index = 1
+rotation = 1.5708
+scale = Vector2(7.5, 7.5)
+script = ExtResource("1_rgcwt")
+meleeItem = NodePath("SwordSprite")
+meleeTrail = NodePath("SwordTrailSprite")
+meleeCol = NodePath("CollisionPolygon2D")
+attackSize = 75.0
+attackTime = 0.5
+
+[node name="SwordSprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_qxiw0")
+
+[node name="SwordTrailSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_myudw")
+frame_progress = 0.920857
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-7, 6, -5, 5, -4, 3, -2, 2, 2, 2, 2, -7, 1, -8, -1, -8, -5, -6, -7, -4, -7, 2)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0

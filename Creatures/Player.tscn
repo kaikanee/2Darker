@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dwdsxunemyx2b"]
+[gd_scene load_steps=7 format=3 uid="uid://dwdsxunemyx2b"]
 
 [ext_resource type="Script" path="res://Creatures/Player.cs" id="1_sfcmd"]
 [ext_resource type="Texture2D" uid="uid://clbc4y4o4hpfj" path="res://Creatures/fighter_1.png" id="2_gu8yd"]
-[ext_resource type="PackedScene" uid="uid://dmafl0fumfx7v" path="res://Creatures/Projectile.tscn" id="2_lcvyo"]
+[ext_resource type="PackedScene" uid="uid://2lebi87nmprb" path="res://Creatures/Projectile.tscn" id="2_lcvyo"]
+[ext_resource type="PackedScene" uid="uid://dbgpln8ty8nbs" path="res://Weapons/Arming Sword/ArmingSword.tscn" id="3_km516"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7ghpc"]
 animations = [{
@@ -21,6 +22,7 @@ size = Vector2(110, 150)
 [node name="Player" type="Area2D" groups=["player"]]
 script = ExtResource("1_sfcmd")
 Arrows = ExtResource("2_lcvyo")
+Melee = ExtResource("3_km516")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7ghpc")

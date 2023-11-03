@@ -8,14 +8,22 @@ public partial class Player : Area2D
 
 	[Export]
 	public PackedScene Arrows {get; set;}
+	
+	[Export]
+	public PackedScene Melee {get; set;}
 
 	public Vector2 ArenaSize; //Size of the module
+
+	public bool isProjectileEquipped = false;
 
 
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		ArmingSword sword = Melee.Instantiate<ArmingSword>();
+		sword.Position = Position + (new Vector2(135, 0));
+		AddChild(sword);
 		ArenaSize = GetViewportRect().Size;
 
 	}
@@ -31,7 +39,7 @@ public partial class Player : Area2D
 		target.Position = Position;
 		Rotation = targetRotation;
 
-		if(Input.IsActionPressed("attack"))
+		if(Input.IsActionPressed("attack") && isProjectileEquipped)
 		{
 			Timer attackTimer = GetNode<Timer>("AttackTimer");
 			if(attackTimer.TimeLeft <= 0)
@@ -44,7 +52,14 @@ public partial class Player : Area2D
 			}
 		}
 		
-
+		if(Input.IsActionPressed("equip1"))
+		{
+			isProjectileEquipped = false;
+		}
+		if(Input.IsActionPressed("equip2"))
+		{
+			isProjectileEquipped = true;
+		}
 
 		//Movement
 		Vector2 velocity = Vector2.Zero;
