@@ -6,12 +6,24 @@ public partial class Player : Area2D
 	[Export]
 	public int Speed { get; set; } = 400;
 
+	[Export]
+	public PackedScene Arrows {get; set;}
+	
+	[Export]
+	public PackedScene Melee {get; set;}
+
 	public Vector2 ArenaSize; //Size of the module
+
+	public bool isProjectileEquipped = false;
+
 
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		ArmingSword sword = Melee.Instantiate<ArmingSword>();
+		sword.Position = Position + (new Vector2(135, 0));
+		AddChild(sword);
 		ArenaSize = GetViewportRect().Size;
 
 	}
@@ -19,8 +31,38 @@ public partial class Player : Area2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		Vector2 velocity = Vector2.Zero;
+		//Cursor + Attacking
+		Marker2D target = GetNode<Marker2D>("AttackOrigin");
+		Vector2 targetPosition = GetGlobalMousePosition();
+		float targetRotation = (targetPosition - Position).Angle();
+		target.Rotation = targetRotation;
+		target.Position = Position;
+		Rotation = targetRotation;
 
+		if(Input.IsActionPressed("attack") && isProjectileEquipped)
+		{
+			Timer attackTimer = GetNode<Timer>("AttackTimer");
+			if(attackTimer.TimeLeft <= 0)
+			{
+				attackTimer.Start();
+				Projectile arrow = Arrows.Instantiate<Projectile>();
+				arrow.Position = target.Position;
+				arrow.Transform = target.Transform;
+				GetParent().AddChild(arrow);
+			}
+		}
+		
+		if(Input.IsActionPressed("equip1"))
+		{
+			isProjectileEquipped = false;
+		}
+		if(Input.IsActionPressed("equip2"))
+		{
+			isProjectileEquipped = true;
+		}
+
+		//Movement
+		Vector2 velocity = Vector2.Zero;
 		if(Input.IsActionPressed("move_right"))
 		{
 			velocity.X += 1;
@@ -52,6 +94,8 @@ public partial class Player : Area2D
 
 		Position += velocity * (float)delta;
 		Position = new Vector2(x: Mathf.Clamp(Position.X, 0, ArenaSize.X), y: Mathf.Clamp(Position.Y, 0, ArenaSize.Y));
+
+		
 
 	}
 }
